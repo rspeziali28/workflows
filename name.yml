@@ -1,0 +1,20 @@
+name: Check README contains name
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify name is present in README
+        run: |
+          if ! grep -q "Riccardo" README.md; then
+            echo "Errore: il README.md non contiene il nome richiesto."
+            exit 1
+          fi
+          echo "OK: nome trovato nel README."
